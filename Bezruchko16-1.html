@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>завдання 1 2 3 4</title>
+</head>
+<body>
+
+  <!-- Завдання 1 -->
+  <img src="https://static-cse.canva.com/blob/847064/29.jpg" width="200" height="300">
+  <img src="https://static-cse.canva.com/blob/847064/29.jpg" width="200" height="300">
+  <img src="https://static-cse.canva.com/blob/847064/29.jpg" width="200" height="300">
+
+  <br><br>
+
+  <!-- Завдання 2, 3, 4 -->
+  <a href="https://uk.wikipedia.org/wiki/JavaScript">Посилання 1</a><br>
+  <a href="https://uk.wikipedia.org/wiki/JavaScript">Посилання 2</a><br>
+  <a href="https://uk.wikipedia.org/wiki/JavaScript">Посилання 3</a>
+
+  <script>
+    // Завдання 1
+    const images = document.querySelectorAll('img');
+    images.forEach(img => {
+      img.onclick = function() {
+        alert(this.src);
+      };
+    });
+
+    // Завдання 2, 3, 4
+    const links = document.querySelectorAll('a');
+
+    links.forEach(link => {
+      // Завдання 2: при наведенні встановити title
+      const setTitle = (e) => {
+        e.target.title = e.target.textContent;
+      };
+
+      // Завдання 3-4: при наведенні додати href (один раз)
+      const addHrefOnce = (e) => {
+        e.target.textContent += ` (${e.target.href})`;
+        e.target.removeEventListener('mouseover', addHrefOnce);
+      };
+
+      link.addEventListener('mouseover', setTitle);
+      link.addEventListener('mouseover', addHrefOnce);
+    });
+  </script>
+
+</body>
+</html>
