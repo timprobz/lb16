@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Зміна кольору div</title>
+  <style>
+    .color-box {
+      width: 100px;
+      height: 100px;
+      margin: 10px;
+      background-color: green;
+      display: inline-block;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>1. Чергування кольору div при кліку</h2>
+  <div class="color-box"></div>
+  <div class="color-box"></div>
+  <div class="color-box"></div>
+
+  <script>
+    function paintRed(event) {
+      var element = event.target;
+      element.style.backgroundColor = 'red';
+      element.removeEventListener('click', paintRed);
+      element.addEventListener('click', paintGreen);
+    }
+
+    function paintGreen(event) {
+      var element = event.target;
+      element.style.backgroundColor = 'green';
+      element.removeEventListener('click', paintGreen);
+      element.addEventListener('click', paintRed);
+    }
+
+    // Прив'язка першої функції (paintRed) до всіх div
+    var divs = document.querySelectorAll('.color-box');
+    for (var i = 0; i < divs.length; i++) {
+      divs[i].addEventListener('click', paintRed);
+    }
+  </script>
+
+</body>
+</html>

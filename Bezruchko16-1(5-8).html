@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Завдання з input та параграфами</title>
+  <style>
+    input {
+      margin: 5px;
+      padding: 5px;
+    }
+    .valid {
+      border: 2px solid green;
+    }
+    .invalid {
+      border: 2px solid red;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>5. Вивід значення input у абзац при blur</h2>
+  <input type="text" class="input-blur">
+  <input type="text" class="input-blur">
+  <input type="text" class="input-blur">
+  <p id="demo"></p>
+
+  <h2>6. alert тільки при першому кліку на input</h2>
+  <input type="text" class="input-once" value="Перше">
+  <input type="text" class="input-once" value="Друге">
+  <input type="text" class="input-once" value="Третє">
+
+  <h2>7. Квадрат числа у параграфах</h2>
+  <p class="number">3</p>
+  <p class="number">6</p>
+  <p class="number">9</p>
+
+  <h2>8. Перевірка довжини введення</h2>
+  <input type="text" class="check-length" data-length="4">
+  <input type="text" class="check-length" data-length="6">
+  <input type="text" class="check-length" data-length="2">
+
+  <script>
+    // 5. Вивід значення input при blur
+    var blurInputs = document.querySelectorAll('.input-blur');
+    for (var i = 0; i < blurInputs.length; i++) {
+      blurInputs[i].addEventListener('blur', function() {
+        document.getElementById('demo').textContent = this.value;
+      });
+    }
+
+    // 6. alert тільки при першому кліку
+    var onceInputs = document.querySelectorAll('.input-once');
+    for (var j = 0; j < onceInputs.length; j++) {
+      (function(input) {
+        var clicked = false;
+        input.addEventListener('click', function() {
+          if (!clicked) {
+            alert(input.value);
+            clicked = true;
+          }
+        });
+      })(onceInputs[j]);
+    }
+
+    // 7. Квадрат числа у параграфах
+    var paragraphs = document.querySelectorAll('.number');
+    for (var k = 0; k < paragraphs.length; k++) {
+      paragraphs[k].addEventListener('click', function() {
+        var number = parseFloat(this.textContent);
+        this.textContent = number * number;
+      });
+    }
+
+    // 8. Перевірка довжини введення
+    var lengthInputs = document.querySelectorAll('.check-length');
+    for (var l = 0; l < lengthInputs.length; l++) {
+      lengthInputs[l].addEventListener('blur', function() {
+        var requiredLength = parseInt(this.getAttribute('data-length'));
+        if (this.value.length === requiredLength) {
+          this.classList.remove('invalid');
+          this.classList.add('valid');
+        } else {
+          this.classList.remove('valid');
+          this.classList.add('invalid');
+        }
+      });
+    }
+  </script>
+</body>
+</html>
